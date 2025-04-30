@@ -11,6 +11,7 @@ struct lst
 
 lst *createlst(int length)
 {
+    /*Функция создания списка*/
     lst* curr = 0, // Адрес очередного элемента списка
         *next = 0; // Адрес следующего за очередным элемента списка
     // Начинаем создавать список с последнего элемента
@@ -30,7 +31,8 @@ lst *createlst(int length)
 }
 
 void appendlst(lst *curr){
-    // Добавление элемента к списку
+    /*Функция Добавление элемента к списку*/ 
+    
     // Выполняем цикл пока адрес очередного элемента списка не равен 0
     while (curr)
     {
@@ -46,6 +48,7 @@ void appendlst(lst *curr){
 }
 
 lst *sortedlst(lst *curr, int length) {
+    /*Функция пузырьковой сортировки списка*/
     lst *currNode = curr;
     int len = length;
     int itr = 0;
@@ -99,8 +102,26 @@ lst *sortedlst(lst *curr, int length) {
     return curr;
 }
 
+
+void findchislo(lst *curr, int chislo)
+{
+	/*функция поиска по значению*/
+    
+    // флаг на найденное значение
+    bool fl = false;
+    if (curr == nullptr) cout << "The list is empty";
+	
+    while (curr != nullptr) {
+        if (curr->data == chislo) fl = true;
+        curr = curr->tail;
+    }
+
+    if(fl) cout << "List item found";
+    else cout << "List item not found";
+}
+
 void printlst(lst *curr){
-    // вывод элементов списка на экран
+    /* Функция вывода элементов списка на экран*/
     while (curr)
     {
     // Выводим информационную часть очередного элемента на экран
@@ -128,11 +149,17 @@ int main() {
     //добавление элементов в конец списка
     appendlst(list);
 
+    int chislo{};
+    cin >> chislo;
+    
     //сортировка списка 
-    list = sortedlst(list, n);
+    //list = sortedlst(list, n);
     
     // печать списка
-    printlst(list);
+    //printlst(list);
+
+    // поиск по значению
+    findchislo(list, chislo);
 
 
     return 0;
