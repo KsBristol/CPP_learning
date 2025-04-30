@@ -120,8 +120,37 @@ void findchislo(lst *curr, int chislo)
     else cout << "List item not found";
 }
 
-void printlst(lst *curr){
+void delchislo(lst *curr, int chislo){
+    /*функция удаления элемента по значению*/
+    if (curr == nullptr) return; // Если список пуст, ничего не делаем
+
+    // Если нужно удалить головной элемент
+    if (curr->data == chislo) {
+        lst* temp = curr;
+        curr = curr->tail;
+        delete temp;
+        cout << "List item deleted\n";
+        return;
+        }
+        
+    
+    while (curr->tail != nullptr) {
+        if (curr->tail->data == chislo) {
+            lst* temp = curr->tail;
+            curr->tail = curr->tail->tail; // Пропускаем удаляемый узел
+            delete temp; // Освобождаем память
+            cout << "List item deleted\n";
+            return;
+        }
+            curr = curr->tail;
+    }
+    cout << "List item not found\n";
+}
+
+int printlst(lst *curr){
     /* Функция вывода элементов списка на экран*/
+    if (curr == nullptr) {cout << "The list is empty"; return 0;}
+    
     while (curr)
     {
     // Выводим информационную часть очередного элемента на экран
@@ -129,6 +158,8 @@ void printlst(lst *curr){
         curr = curr -> tail;
     }
     cout << endl;
+
+    return 0;
 }
 
 int main() {
@@ -155,11 +186,14 @@ int main() {
     //сортировка списка 
     //list = sortedlst(list, n);
     
-    // печать списка
-    //printlst(list);
-
     // поиск по значению
-    findchislo(list, chislo);
+    //findchislo(list, chislo);
+
+    //удаление по значению
+    delchislo(list, chislo);
+
+    // печать списка
+    printlst(list);
 
 
     return 0;
