@@ -152,6 +152,42 @@ class LinkedList { // методы по работе со списком
         delete ptr;
     }
 
+    // Сортировка пузырьком
+    Node* bubbleSort(Node* head) {
+    if (head == nullptr) return head;
+
+    bool swapped;
+    Node* curr;
+    Node* last = nullptr;
+
+    // Keep going until no swaps occur in a pass
+    do {
+        swapped = false;
+        curr = head;
+
+        // проходим по списку пока узлы не станут в правильном порядке
+        while (curr->next != last) {
+            if (curr->data > curr->next->data) {
+              
+                // замена данных в текущем элементе 
+                // переход к следующему элементу
+                int swap_data = curr->data;
+                curr->data = curr->next->data;
+                curr->next->data = swap_data;
+
+                swapped = true;
+            }
+            curr = curr->next;
+        }
+        
+        // уменьшение размера списка 
+        // после каждого прохода
+        last = curr;
+    } while (swapped);
+
+    return head;
+}
+
 };
 
 int main()
@@ -190,6 +226,9 @@ int main()
     for (Node* ptr = lst.head; ptr != NULL; ptr = ptr->next)
         std::cout << ptr->data << " ";
         std::cout << std::endl;
+
+    // сортировка списка пузырьком
+    // lst.bubbleSort(lst[0]);
 
     return 0;
 }
